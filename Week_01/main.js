@@ -29,15 +29,18 @@ function show() {
 
 function move(x, y) {
   pattern[x][y] = symbol;
-  if (check()) {
+  if (check(pattern, symbol)) {
     alert(symbol == 2 ? "❌ is winner!" : "⭕️ is winner!");
   }
   symbol = 3 - symbol;
   show();
+  if (willWin(pattern, symbol)) {
+    console.log(symbol == 2 ? "❌ will win!" : "⭕️ win win!");
+  }
 }
 
 
-function check() {
+function check(pattern, symbol) {
   //check columns
   for (let i = 0; i < boardWidth; i++) {
     let win = true;
@@ -84,6 +87,30 @@ function check() {
       return true;
     }
   }
+}
+
+function clone(pattern) {
+  return JSON.parse(JSON.stringify(pattern));
+}
+
+function willWin(pattern, symbol) {
+  for (let i = 0; i < boardWidth; i++) {
+    for (let j = 0; j < boardHeight; j++) {
+      //if not empty skip
+      if (pattern[i][j]) {
+        continue;
+      }
+      //clone this board
+      let tempPattern = clone(pattern);
+      //make a move
+      tempPattern[i][j] = symbol;
+      //check the move made by AI
+      if (check(tempPattern, symbol)) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 show(pattern);
