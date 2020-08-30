@@ -1,0 +1,11 @@
+.cell {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  background-color: green;
+  border: 1px solid #fff;
+  vertical-align: middle;
+  font-size: 50px;
+}
