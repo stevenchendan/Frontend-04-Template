@@ -1,14 +1,13 @@
 let pattern = [
-  [2, 0, 0],
-  [0, 1, 0],
+  [0, 0, 0],
+  [0, 0, 0],
   [0, 0, 0]
 ];
-
-let color = 1;
+let boardWidth = 3;
+let boardHeight = 3;
+let symbol = 1;
 
 function show() {
-  let boardWidth = 3;
-  let boardHeight = 3;
   let board = document.getElementById("board");
   //refresh the board
   board.innerHTML = "";
@@ -27,10 +26,64 @@ function show() {
   }
 }
 
+
 function move(x, y) {
-  pattern[x][y] = color;
-  color = 3 - color;
+  pattern[x][y] = symbol;
+  if (check()) {
+    alert(symbol == 2 ? "❌ is winner!" : "⭕️ is winner!");
+  }
+  symbol = 3 - symbol;
   show();
+}
+
+
+function check() {
+  //check columns
+  for (let i = 0; i < boardWidth; i++) {
+    let win = true;
+    for (let j = 0; j < 3; j++) {
+      if (pattern[i][j] !== symbol) {
+        win = false;
+      }
+    }
+    if (win) {
+      return true;
+    }
+  }
+  //check rows
+  for (let i = 0; i < boardWidth; i++) {
+    let win = true;
+    for (let j = 0; j < boardHeight; j++) {
+      if (pattern[j][i] !== symbol) {
+        win = false;
+      }
+    }
+    if (win) {
+      return true;
+    }
+  }
+  {
+    let win = true;
+    for (let j = 0; j < boardHeight; j++) {
+      if (pattern[j][2 - j] !== symbol) {
+        win = false;
+      }
+    }
+    if (win) {
+      return true;
+    }
+  }
+  {
+    let win = true;
+    for (let j = 0; j < boardHeight; j++) {
+      if (pattern[j][j] !== symbol) {
+        win = false;
+      }
+    }
+    if (win) {
+      return true;
+    }
+  }
 }
 
 show(pattern);
