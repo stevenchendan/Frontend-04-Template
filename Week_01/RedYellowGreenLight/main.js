@@ -1,4 +1,5 @@
 let lights = document.getElementsByTagName("div");
+let stopProgram = false;
 
 function green() {
   removeLight()
@@ -11,11 +12,15 @@ function red() {
 }
 
 function yellow() {
-  fremoveLight()
+  removeLight()
   document.getElementsByClassName("yellow")[0].classList.add("light");
 }
 
 function go() {
+  if (!!stopProgram) {
+    removeLight();
+    return;
+  }
   green();
   setTimeout(function() {
     yellow();
@@ -32,4 +37,8 @@ function removeLight() {
   for (var i = 0; i < 3; i++) {
     lights[i].classList.remove("light");
   }
+}
+
+function stop() {
+  stopProgram = true;
 }
