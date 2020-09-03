@@ -28,15 +28,13 @@ function go() {
     return;
   }
   green();
-  setTimeout(function() {
+  sleep(1000).then(() => {
     yellow();
-    setTimeout(function() {
-      red();
-      setTimeout(function() {
-        go();
-      }, 500);
-    }, 200);
-  }, 1000);
+    return sleep(200);
+  }).then(() => {
+    red();
+    return sleep(500);
+  }).then(go);
 }
 
 function removeLight() {
