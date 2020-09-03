@@ -16,6 +16,12 @@ function yellow() {
   document.getElementsByClassName("yellow")[0].classList.add("light");
 }
 
+function sleep(milliseconds) {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, milliseconds);
+  })
+}
+
 function go() {
   if (!!stopProgram) {
     removeLight();
@@ -28,9 +34,9 @@ function go() {
       red();
       setTimeout(function() {
         go();
-      }, 5000);
-    }, 2000);
-  }, 10000);
+      }, 500);
+    }, 200);
+  }, 1000);
 }
 
 function removeLight() {
@@ -41,4 +47,8 @@ function removeLight() {
 
 function stop() {
   stopProgram = true;
+}
+function start() {
+  stopProgram = false;
+  go();
 }
