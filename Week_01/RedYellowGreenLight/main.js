@@ -1,25 +1,17 @@
+let lights = document.getElementsByTagName("div");
 
 function green() {
-  let lights = document.getElementsByTagName("div");
-  for (var i = 0; i < 3; i++) {
-    lights[i].classList.remove("light");
-  }
+  removeLight()
   document.getElementsByClassName("green")[0].classList.add("light");
 }
 
 function red() {
-  let lights = document.getElementsByTagName("div");
-  for (var i = 0; i < 3; i++) {
-    lights[i].classList.remove("light");
-  }
+  removeLight()
   document.getElementsByClassName("red")[0].classList.add("light");
 }
 
 function yellow() {
-  let lights = document.getElementsByTagName("div");
-  for (var i = 0; i < 3; i++) {
-    lights[i].classList.remove("light");
-  }
+  fremoveLight()
   document.getElementsByClassName("yellow")[0].classList.add("light");
 }
 
@@ -34,4 +26,10 @@ function go() {
       }, 5000);
     }, 2000);
   }, 10000);
+}
+
+function removeLight() {
+  for (var i = 0; i < 3; i++) {
+    lights[i].classList.remove("light");
+  }
 }
