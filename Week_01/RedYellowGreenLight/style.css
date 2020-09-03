@@ -1,0 +1,20 @@
+div {
+  background-color: grey;
+  display: inline-block;
+  margin: 30px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
+
+.green.light {
+  background-color: green;
+}
+
+.yellow.light {
+  background-color: yellow;
+}
+
+.red.light {
+  background-color: red;
+}
