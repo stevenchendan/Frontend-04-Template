@@ -22,19 +22,19 @@ function sleep(milliseconds) {
   })
 }
 
-function go() {
+async function go() {
   if (!!stopProgram) {
     removeLight();
     return;
   }
-  green();
-  sleep(1000).then(() => {
+  while (true) {
+    green();
+    await sleep(1000);
     yellow();
-    return sleep(200);
-  }).then(() => {
+    await sleep(200);
     red();
-    return sleep(500);
-  }).then(go);
+    await sleep(500);
+  }
 }
 
 function removeLight() {
