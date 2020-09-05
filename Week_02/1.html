@@ -1,21 +1,38 @@
-<style>
-  .cell {
-    display:inline-block;
-    width: 6px;
-    height: 6px;
-    background-color: gray;
-    border-bottom: solid 1px white;
-    border-right: solid 1px white;
-    vertical-align: middle;
-  }
-  #container {
-    width: 701px;
-  }
-</style>
-<div id="container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .cell {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      line-height: 7px;
+      background-color: #f5f5f5;
+      border-width: 0 1px 1px 0;
+      border-color: white;
+      border-style: solid;
+      vertical-align: top;
+    }
+    #container {
+      width: 701px;
+      font-size: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
 
-</div>
-<button>save</button>
-<script>
- 
-</script>
+  </div>
+  <button onclick="saveMap()">save</button>
+  <script>
+    let map = localStorage["map"] ? JSON.stringify(map) : Array(1000).fill(0);
+  
+  
+    function saveMap() {
+      localStorage['map'] = JSON.stringify(map);
+    }
+  </script>
+</body>
