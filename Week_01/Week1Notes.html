@@ -1,0 +1,970 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Week 1 前端训练营</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a98a7781-1810-4e26-bcd6-79e4b8641285" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/met_henry_lerolle_1885.jpg" style="object-position:center 9.999999999999998%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🎴</span></div><h1 class="page-title">Week 1 前端训练营</h1></header><div class="page-body"><p id="3311285a-04ef-4c3e-99ac-b112455c7ed6" class="">
+</p><h3 id="cd6c416c-5173-4357-9206-706289b031be" class="">Date: <time>@Aug 30, 2020</time> </h3><p id="ecc684c6-832e-44b1-b2bf-e9feb56328ab" class="">
+</p><div id="a0f8eb6a-bad5-43ec-87ab-bf0c1dddb758" class="column-list"><div id="cc668461-396a-4618-90c2-288515f28c27" style="width:43.75%" class="column"><h3 id="32f4184d-4322-444f-a580-d0ee4e21c411" class="block-color-blue_background">Topic: </h3><ol id="0bb1f2e5-30b4-462a-bf01-670123d6878b" class="numbered-list" start="1"><li>编程练习tictactoe</li></ol><ol id="0f010bd5-d7e2-4f9e-a032-545bd93602fc" class="numbered-list" start="2"><li>红绿灯问题练习</li></ol><p id="3649e39b-e065-42ef-b304-55289a72db42" class="">
+</p></div><div id="03b54903-532b-42ba-af17-f9b174143596" style="width:56.25%" class="column"><h3 id="d65f19b3-b4c9-48c9-82ea-d22d4fbfae29" class="block-color-purple_background">Motivation:</h3><ul id="1b878953-00d3-473d-b342-f183a70dba06" class="bulleted-list"><li>通过实现tictactoe来锻炼编程能力</li></ul><ul id="bb67fd3e-989a-4153-8d91-c782cb437919" class="bulleted-list"><li>通过</li></ul><ul id="c17847a5-da40-4833-8b3b-3c8d9acad849" class="bulleted-list"><li>提高抽象的能力</li></ul></div></div><hr id="e4dfd072-7dc5-4a49-b4ed-378a0b1823da"/><div id="8d120140-ff8a-416e-a0b0-853cecc7c59f" class="column-list"><div id="71f6b326-2da4-4efe-81cf-021a7baafb65" style="width:43.75%" class="column"><h3 id="afa24ce2-8cb2-4ba7-8629-9aa76cd62028" class="block-color-gray_background">Cues</h3><p id="38afa8b0-fdde-4cd3-a8c1-0e4e4eb28569" class="">项目结构:</p><ul id="29ba7dbd-5376-4c23-80b4-6f3d21cee2ab" class="bulleted-list"><li>tictactoe1.html(required)</li></ul><ul id="75a2196a-60a6-44b0-8f83-1590952c37fd" class="bulleted-list"><li>main.js(Optional)</li></ul><ul id="34ff3120-4863-4a13-b4b0-4eb3fc1beb18" class="bulleted-list"><li>style.css(Optional)</li></ul><p id="09b42d42-07a3-4b13-9e1d-44b661849ac8" class="">
+</p><p id="f06e3315-cdd3-466e-9dd9-8fe53657193e" class="">建议通过打断点看看执行过程，方便理解程序逻辑。</p><figure id="5d8f1ba5-b5e9-4cd2-a9c7-361dc0243cae" class="image"><a href="images/"><img style="width:1462px" src="images/Untitled.png"/></a></figure><p id="1751985d-04f4-4070-9423-ba02fb0a89a2" class="">
+</p><p id="b5ee2d4e-5790-413f-861b-41ac0f19cedb" class="">
+</p><p id="dd223ae8-fc03-4a3c-a0fe-90abeac10948" class="">
+</p><p id="8a232181-0710-46aa-8e40-414737275fdd" class="">
+</p><p id="d6421a65-36d3-406b-9cca-eeb224cc196c" class="">
+</p><p id="243292dd-bc0c-43ba-b4a5-beb614c03a0c" class="">
+</p><p id="b6fb5308-bf2d-4423-b7a6-390be1c57fba" class="">
+</p><p id="633ce836-54c1-4d00-88a1-4d5d65b62bad" class="">
+</p><p id="ed273a18-ea2f-4653-9b08-8598c663cc92" class="">
+</p><p id="6a831d98-4aef-4a0c-922a-7b785088f772" class="">
+</p><p id="9f14e7df-25d5-4716-8c81-172ccd17841c" class="">
+</p><p id="35d4156b-52a0-469d-a214-7578c2f41e80" class="">
+</p><p id="7b3beb86-bd5e-4328-aec5-6ae910a9c10f" class="">
+</p><p id="043fcbbf-4331-4051-97f7-999e8c617b53" class="">名字和视频中会有一些出入，个人风格不用在意。</p><p id="3c82bf61-82ba-4dad-9064-7164fd6017cf" class="">
+</p><p id="ab61f0d5-86cc-45bf-92b7-4f457554f6b5" class="">
+</p><p id="31f2113c-773c-4096-9264-ccd41b1501bd" class="">
+</p><p id="4dc1706c-af1b-4c09-9ed3-c9d9b2500804" class="">
+</p><p id="ab1e168d-5e25-43a9-b24c-8fd4183660dc" class="">
+</p><p id="3a04a9b7-f5b7-4157-8c39-4dac6dc839bb" class="">
+</p><p id="26e41ac2-18f9-4f14-b405-2f69546a6b61" class="">
+</p><p id="3ab65557-aa8d-4465-83c2-fe1c6553b59b" class="">
+</p><p id="784bdd6c-0cf1-4513-9257-bd7f33c784be" class="">
+</p><p id="eefec22a-1217-4f6f-89f1-fb066f67d88b" class="">
+</p><p id="b2fd0d97-6f28-48e2-9704-1be2f173decf" class="">
+</p><p id="8f2b3548-36ee-4b48-ad63-9a6e99b7642d" class="">
+</p><p id="059c2f92-32f3-4d99-90e5-eb14ef66e8bc" class="">
+</p><p id="168d14bb-a7bf-4ce4-9d09-eac43b7c4cc3" class="">
+</p><p id="a982c070-9be6-470d-abf0-ecdc83f3bb6c" class="">
+</p><p id="19202d67-91d8-4efd-819a-576bfe9c4978" class="">
+</p><p id="b542c369-849a-4262-8a18-977c37d0ed84" class="">
+</p><p id="54682a5b-6c62-4ce1-9ab7-db127ed3840a" class="">
+</p><p id="0f3ea829-9bdb-4f60-a44a-7027d9109b27" class="">
+</p><p id="d3900c68-df9a-4f0e-8544-9ea38b2abc48" class="">
+</p><p id="9015e7c8-ad73-42ac-8337-b7e328533bb7" class="">
+</p><p id="c16a3a30-6e1f-4887-a565-76547d2f9519" class="">
+</p><p id="b1d10ab1-22a2-4a9e-b73f-9e5878696de3" class="">
+</p><p id="b561cb37-ab76-44ae-84bc-32115f419558" class="">
+</p><p id="332223a0-834e-4148-816f-2a554a6b7d10" class="">
+</p><p id="3b7bcf20-8560-4fcc-bbc5-0fcc8828224e" class="">
+</p><p id="20cf12ad-f180-4616-849e-a5fc792df556" class="">另外这个花括号是一个很好的使用let 的一个小技巧</p><p id="da260651-5b77-4ba7-bcb4-04a3032c5e1b" class="">添加了花括号之后就变成一个局部变量 我们可以给这个win 反复赋值</p><pre id="415afa48-cfdc-4ec9-a502-cfffeb241766" class="code"><code>{
+	let win = true;
+	...
+}</code></pre><p id="8c540f18-18b4-4fa2-8fe5-7920f7f9cb12" class="">A good explaination:</p><p id="d146277e-de54-477c-8379-dd63f40f05fb" class=""><a href="https://stackoverflow.com/questions/37633074/is-it-a-good-practice-to-use-naked-brackets-inside-functions">https://stackoverflow.com/questions/37633074/is-it-a-good-practice-to-use-naked-brackets-inside-functions</a></p><p id="1dafcebb-2362-4f36-a118-4280d69cc3d4" class="">
+</p><p id="3bdd8494-6861-4a4f-8f90-427b2e653276" class="">
+</p><p id="bbb13d19-9d61-4b23-8ea2-0d23fd8f7493" class=""><a href="https://github.com/AQUA-lu/Frontend-04-Template/blob/master/Week_01/2.html">https://github.com/AQUA-lu/Frontend-04-Template/blob/master/Week_01/2.html</a></p><p id="4a90e505-0b2b-441f-bd30-d3edf8032206" class="">这位同学注释写的很好可以帮助理解。</p><p id="397bbb61-66de-41f0-bf0b-35c136fef2cf" class="">
+</p><p id="2ec33054-a4c7-42ff-9328-132038bfc235" class="">
+</p><p id="e2335f04-e737-4c47-a270-c1ea4aa1a1b7" class="">
+</p><p id="81fa2b38-24b3-499f-98bd-f77e4eea5453" class="">
+</p><p id="98b2425c-8b89-46c2-800e-54dc634b438e" class="">
+</p><p id="62fd5441-e5c2-45f3-89d1-52d3868b0d21" class="">
+</p><p id="b54237e4-d3b4-4d6d-8677-aed9051c3b5e" class="">
+</p><p id="400e63a8-4889-4e30-81c6-7d35223f4ad3" class="">
+</p><p id="4ab265cf-adbe-4b57-ba7a-eb1fb2f93aef" class="">
+</p><p id="4d61009c-5106-4114-915d-54e339e7a012" class="">
+</p><p id="4c208dd8-3af0-4eb9-8321-553cbb589175" class="">
+</p><p id="82e3de64-b33f-4ebd-9f91-96be7bc68116" class="">
+</p><p id="3243d63b-6385-4c21-b8a4-aecb8864e87e" class="">
+</p><p id="fc991a9a-ff0d-43b0-ac81-4d24f2a0586f" class="">
+</p><p id="ddc7e588-fff2-491b-bb63-fb3d79dcb5c2" class="">
+</p><p id="74c94564-0d26-41ae-9204-ad24f753924a" class="">
+</p><p id="ea35a4ba-b06c-45f6-b683-24529c31c7e4" class="">
+</p><p id="94319f8e-d922-476c-b057-84910f003cb6" class="">
+</p><p id="332ed7e9-5991-473c-8795-df9e39ccf7e0" class="">
+</p><p id="e0d0b834-50af-4b89-8196-46b83fda8db0" class="">
+</p><p id="3bace769-3e8a-450b-9f2a-bbf10f360ca7" class="">
+</p><p id="25a99869-489a-4a3b-b158-e81473526151" class="">
+</p><p id="bed505bb-98c0-4b82-b021-4dba376df672" class="">
+</p><p id="69bb6128-8295-4ad4-8dc5-f880964533ae" class="">
+</p><p id="8654b934-652f-411c-8d83-7f5bbaf3f5dc" class="">
+</p><p id="1f866597-2b83-4c6d-a48c-1333272af57a" class="">
+</p><p id="b11094c4-cdbd-4434-84cb-f40a9b622022" class="">
+</p><p id="6332b4a5-d5f6-4624-8a94-e5ba3746d837" class="">
+</p><p id="667ab97c-eb41-40f2-9171-0026963404dc" class="">
+</p><p id="faa8fe29-17fb-49d1-b874-10c800ba94b3" class="">
+</p><p id="a0c6bb72-7abe-4cdb-85c5-4772264371b5" class="">
+</p><p id="1f2f0d58-b7eb-40be-803d-d3122856e16c" class="">
+</p><p id="649ca63d-07b2-4575-a3c7-8853ef862ebe" class="">
+</p><p id="ae76b858-e011-4a5a-a705-852d82b33cca" class="">
+</p><p id="a8e2a569-0327-4dca-ab81-dd2ba1d6ca69" class="">
+</p><p id="f430a30c-cfed-4105-9db5-d8796dd410e4" class="">
+</p><p id="f79f3485-1ae7-43ef-9b5c-0490385cf48a" class="">
+</p><p id="7703770a-fcb5-4d34-ba3b-2f9a11cf9e30" class="">
+</p><p id="6da0c02e-1641-49de-8f49-d6212d54c1b5" class="">
+</p><p id="2171f974-df4b-48be-a2c4-56110382923b" class="">
+</p><p id="269bc1c6-8080-49b8-8f72-aa3a2ebf348b" class="">
+</p><p id="e9074702-24ce-434d-bd97-05ab6a81103f" class="">
+</p><p id="29970ad1-9e1c-4f4f-93b5-7df241f98a9e" class="">
+</p><p id="80aa5c3c-e773-41fc-98ab-a8a8da8cb651" class="">
+</p><p id="40f5c2a4-1c2e-4b2b-a490-20b43e004564" class="">
+</p><p id="65a036fd-d593-4b8d-8023-b4ca60a2edc3" class="">
+</p><p id="8a353a5c-8566-4020-98af-c52465e09116" class="">
+</p><p id="b9188fca-f0f1-47b6-bfcc-7093eb6de6c8" class="">
+</p><p id="9f2deacc-52b0-4e65-94f7-44063ad30274" class="">
+</p><p id="e8b44af4-2f5c-4248-b096-3b4886ada6f4" class="">
+</p><p id="1ce05b2c-517e-4f7c-b519-befef3d3159f" class="">
+</p><p id="9220b915-1ebc-40b7-ba75-ea6489d75196" class="">
+</p><p id="6c3496e7-784b-4594-9636-cb94e8a4e112" class="">
+</p><p id="d6382066-8aa7-4323-a194-224826b7c00e" class="">
+</p><p id="a00a104e-6b16-47d8-b01c-2e1d7e50c294" class="">
+</p><p id="3ef841ee-7602-4a50-8005-793bc70baf93" class="">
+</p><p id="661027f1-4c38-4f05-9307-aa66feaf5e6d" class="">
+</p><p id="673ca10d-790d-44ee-9715-e9764152dd23" class="">
+</p><p id="15189aeb-096d-4d21-9c29-946c7f255ec4" class="">
+</p><p id="4bfd6ad3-721a-4741-94ae-3cb9bcda76d5" class="">
+</p><p id="d8b91a74-47ef-40d6-8b9f-22a74ab737cd" class="">
+</p><p id="9f20d9d7-8259-476f-b160-f11c99fe9268" class="">
+</p><p id="a9fe30f2-fcfb-42ee-8af7-53feed014feb" class="">
+</p><p id="966f8202-dbab-4b0e-83df-2177f5d4afb2" class="">
+</p><p id="64ea6354-6f99-4b2a-bb87-a9ff1a6a9446" class="">
+</p><p id="27140bb3-565c-48ad-b453-9574e66d9633" class="">
+</p><p id="81879843-00ff-46ec-b24c-16b0bedd7ec1" class="">
+</p><p id="9018908c-9a93-424b-bb59-12b9369fac17" class="">
+</p><p id="961651d5-452c-466a-ad3b-ac4f48e5cb0e" class="">
+</p><p id="bf560a61-0060-489b-80f3-bf238eef4e84" class="">
+</p><p id="edc3d99f-362f-4310-b00b-3a1522ad2f63" class="">
+</p><p id="fcdd5ad9-4dc2-45f4-809e-ad5b45e9e011" class="">
+</p><p id="69ace34a-87c3-4d59-a644-c4a4941444e4" class="">
+</p><p id="febbe1d5-d4d1-449c-a6f5-30863dd9603b" class="">
+</p><p id="49ba5abd-abae-482d-b2fc-e01bb0982537" class="">
+</p><p id="03ab2eca-773d-4e8d-963e-d25d667ee387" class="">
+</p><p id="ca328ca7-f045-4473-ba65-5ccfa82ada81" class="">
+</p><p id="84e295d1-96d5-4d99-b215-75cdca48262e" class="">
+</p><p id="32464699-c97c-4076-b7de-46a138487625" class="">
+</p><p id="a7a5db72-a374-475d-bcd5-7aab33220b69" class="">
+</p><p id="bd962ffe-dfdc-4766-afd4-11ef04c056d7" class="">
+</p><p id="bd74f50c-e4d7-4e3a-ac71-35873b2b6ae9" class="">
+</p><p id="c7c22689-299b-4c12-9225-af72f376a4af" class="">
+</p><p id="41adacbc-cb45-45cc-9807-549f1e54659d" class="">
+</p><p id="03f112de-5b89-4b22-a8a6-e4a0f7da2160" class="">
+</p><p id="2d884789-35fa-42d8-85d1-81f6cab58013" class="">
+</p><p id="35f73d64-8c41-4233-af85-cccc063331bd" class="">
+</p><p id="87c2ce41-3ab8-47c8-bb8b-a4716319d135" class="">
+</p><p id="4ba5f835-94b3-4157-90ec-1fc610cacb15" class="">
+</p><p id="8bb25e96-cf6e-4045-8f78-e6f33d24db14" class="">
+</p><p id="e3d4f338-0900-48e1-8bdd-33a7df1b797f" class="">
+</p><p id="b373f52f-a2b0-448d-8a0f-154dd0c9d895" class="">
+</p><p id="1f455f5c-9286-4351-b2ab-31749e14dd95" class="">
+</p><p id="392176b3-ee8d-447b-a908-f6f5ff309e0f" class="">
+</p><p id="9bc987ee-4a72-45f0-aa92-2a86a434f4f7" class="">
+</p><p id="73ff0260-abae-4a00-9bd7-4c92b2b9954e" class="">
+</p><p id="1dda4b5b-e817-4364-a165-387d44ede7b5" class="">早年没有async await的时候我们是用</p><p id="335fc371-e00d-41a6-baef-5f849ebb2393" class="">yield 来模拟这样的行为的</p><p id="abc40e42-5415-47e6-845e-f9b64ef29858" class="">有兴趣可以去看看co的一个库是怎么实现的</p><p id="d4ef40ff-c711-4f7d-b765-2fdf9b3c5304" class="">
+</p><p id="d8514a34-3383-4675-a7df-3ab0d58e1974" class="">
+</p><p id="581adf5b-403a-4265-92fd-548eaf83e920" class="">
+</p><p id="af609028-71cf-48a6-b7b7-859b50347eb1" class="">
+</p><p id="7e0dab16-a49a-4664-b97d-06056b11b0f7" class="">
+</p><p id="51bd8933-2a2d-427c-8404-b99d07cad1ff" class="">
+</p><p id="b5f4bbf8-84ed-4a74-b59d-ef000113ca75" class="">
+</p><p id="08ae988c-7f60-4161-8d7a-6b2a89374582" class="">让事件无线循环下去while true是一个很好的practice</p><p id="b09b5775-dd70-46a3-be52-dc77200d4b42" class="">
+</p><p id="698a7ea4-e415-47f9-a48c-4cdf4b1c1e94" class="">
+</p><p id="28d8be3f-0c1a-42f5-bb9c-026775be24b1" class="">
+</p><p id="95f8cba5-db72-4bec-be06-1c1efe65c83e" class="">
+</p><p id="c7b0b06e-f780-4b8b-ace1-6b27a1e84ac9" class="">
+</p><p id="331fd91a-57b4-405b-9be9-5ace2cccbee6" class="">
+</p><p id="8a5062d0-00f8-46ce-9052-c1a238f9ffb7" class="">
+</p><p id="824b4ad0-06f3-47f8-9e36-7dc1de25b211" class="">
+</p><p id="3f338770-dd1f-401e-bb86-7c2f10471d0a" class="">
+</p></div><div id="a6cd1d9e-760b-4d03-8755-25c6a927e4ea" style="width:56.25%" class="column"><h3 id="5fc604fe-f00b-4e6a-acf3-b3a66812a212" class="block-color-orange_background">Notes</h3><p id="f523244b-5225-4383-9478-80c83dde10c2" class="">TicTacToe规则：</p><ol id="ad5c8f6e-f129-44e6-9fe0-ba378fce7d74" class="numbered-list" start="1"><li>3*3 棋盘</li></ol><ol id="943cebab-2dfc-448b-8d2a-db10b8e898e2" class="numbered-list" start="2"><li>双方分别持有圆圈和叉两种棋子</li></ol><ol id="2a08c20a-8412-43f8-8433-3742256a9e41" class="numbered-list" start="3"><li>双方交替落子</li></ol><ol id="137a251b-efe7-43da-8e0c-470f8c487dff" class="numbered-list" start="4"><li>率先连成三子的直线的一方获胜</li></ol><p id="5ddd11ed-a6e6-4358-8d0e-b9d8fd821410" class="">
+</p><p id="8d1b816c-7305-4e05-9168-0d4b68ebd0bd" class="">实现思路：</p><p id="d41a91c8-5fee-4891-b7c9-9c64ad6b6433" class="">棋盘表示: 二维数组(array)</p><p id="a07ec758-48b0-4a3f-a3b9-6490237f0827" class="">以及使用两个for 循环在html上面添加我们的棋盘</p><pre id="19919836-b600-4af7-821f-93cfa1efb820" class="code"><code>function show() {
+  let boardWidth = 3;
+  let boardHeight = 3;
+  let board = document.getElementById(&quot;board&quot;);
+  for (let i = 0; i &lt; boardWidth; i++) {
+    for (let j = 0; j &lt; boardHeight; j++) {
+      let cell = document.createElement(&quot;div&quot;);
+      cell.classList.add(&quot;cell&quot;);
+      cell.innerText = 
+        pattern[j][i] === 2 ? &quot;❌&quot; :
+        pattern[j][i] === 1 ? &quot;⭕️&quot; : &quot;&quot;;
+      
+      cell.addEventListener(&quot;click&quot;, () =&gt; move(j, i));
+      board.appendChild(cell);
+    }
+    board.appendChild(document.createElement(&quot;br&quot;));
+  }
+}</code></pre><p id="c0fcccb9-359e-4cc6-9fc2-4ad3c4a2dd98" class="">
+</p><p id="105819e7-5665-498a-9f04-9e3781fa1411" class="">以及我们eventlistener 监听事件的move function</p><p id="dd5ab690-6d8f-440c-8a74-e33b02d121e0" class=""> </p><pre id="f8393910-f080-41c3-9dc4-c8b83b68fc37" class="code"><code>function move(x, y) {
+	pattern[y][x] = symbol;
+	symbol = 3 - symbol;
+	show();
+}</code></pre><p id="35653287-fcc0-456d-abd9-1264faae3473" class=""> 上面的 symbol = 3 -  symbol; 稍微有点不好理解其实主要就是我们通过一个小技巧</p><p id="76e61d99-5904-49a1-8cf9-0187c028ca8c" class="">用来转换颜色。</p><p id="6845d185-50a9-4f2d-bd38-66bd99e1c903" class="">
+</p><h3 id="b862d469-306a-48c6-bf12-c8181a448c7c" class="">添加判断胜利的function:</h3><p id="ce8d17a5-2a47-416d-81a6-10f0ee801635" class="">这里我们添加了判断横排是不是三个连起来了， 其实竖排的也是几乎同样的代码就是需要[i][j] 换一下位置 变成 [j][i] 就行。</p><p id="fcc80056-de6d-4982-bc3e-151672b020ed" class="">如果这一行或者一列中全都是相同的symbol 我们就判定为win</p><pre id="470feada-eafd-42fc-adae-adfd03f9d5b7" class="code"><code>//check columns
+  for (let i = 0; i &lt; boardWidth; i++) {
+    let win = true;
+    for (let j = 0; j &lt; 3; j++) {
+      if (pattern[i][j] !== symbol) {
+        win = false;
+      }
+    }
+    if (win) {
+      return true;
+    }
+  }</code></pre><p id="44edb80d-d930-4a09-8235-6edfdd3057f9" class="">
+</p><p id="2188d26e-ce63-4a1e-82f4-66c1a8ee73bf" class="">下面这个逻辑式帮助我们检查斜方向上面有没有 三个颜色连在一起的。</p><p id="0c959d19-849c-4472-b460-3330af1dd590" class="">[j][2 - j] 改成 [j][j] 就是另外一个斜的方向。</p><pre id="14c00cb3-03c9-4b99-83b0-0ceed4953663" class="code"><code>{
+    let win = true;
+    for(let j = 0; j &lt; boardHeight; j++) {
+      if(pattern[j][2 - j] !== symbol) {
+        win = false;
+      }
+    }
+    if (win) {
+      return true;
+    }
+  }</code></pre><p id="d7e7cf14-f30c-4905-afe9-cee0997aa248" class="">
+</p><p id="4f376288-dfc5-435a-8704-aad74d110f09" class="">
+</p><p id="5d1b5b30-99f6-4208-9171-2824d42826a5" class="">
+</p><p id="9db4d459-d892-4169-9c68-0b4810d6f7f5" class="">
+</p><p id="5b47f694-e35f-4052-a2ff-182d921785a5" class=""> 添加AI(hard-coded ai)</p><pre id="31ecc720-7a94-4634-a5f3-d39d2ec98835" class="code"><code>function bestChoice(pattern, symbol) {
+  let p;
+  if (p = willWin(pattern, symbol)) {
+    return {
+      point: p,
+      result: 1
+    }
+  }
+  let result = -2;
+  let point = null;
+  for (let i = 0; i &lt; boardWidth; i++) {
+    for (let j = 0; j &lt; boardHeight; j++) {
+      if (pattern[i][j]) {
+        continue;
+      }
+
+      let tempPattern = clone(pattern);
+      tempPattern[i][j] = symbol;
+      let r = bestChoice(tempPattern, 3 - symbol).result;
+
+      if (-r &gt; result) {
+        result = -r;
+        point = [j, i];
+      }
+    }
+  }
+  return {
+    point: point,
+    result: point ? result : 0
+  }
+}</code></pre><p id="b5978121-59d1-4d07-8eb6-a332b3927c12" class="">
+</p><p id="b0c8a8c1-8674-4922-8652-1b2fafe463d1" class="">这里面有一些理解难度的是这个：</p><pre id="8af6e7c9-d012-43b3-97ef-80454a5d5ef3" class="code"><code>if (-r &gt; result) {
+  result = -r;
+  point = [j, i];
+}</code></pre><p id="9d35cb12-f963-497e-90a6-42a06e6d5745" class="">这一段代码的核心思想是找留给对方最差位置的点的一个思路</p><p id="0755c3d1-4133-49fe-ba4c-12f047f65bcb" class="">
+</p><p id="7ec84d4e-448b-49fa-b7f8-799af04297cc" class="">
+</p><p id="2d9de169-673f-40f4-beb5-f28a3b379c59" class="">最后我们可以在加上computer这样我们就有一个完整的ai了：</p><pre id="b808b30a-f507-4ffa-b31e-02025823ae3e" class="code"><code>function computerMove() {
+  //get best option
+  let bestOption = bestChoice(pattern, symbol);
+  if (!!bestOption.point) {
+    pattern[bestOption.point[0]][bestOption.point[1]] = symbol;
+  }
+  //check if there is winner or not
+  if (check(pattern, symbol)) {
+    winnerExit = true;
+    alert(symbol == 2 ? &quot;❌ is winner!&quot; : &quot;⭕️ is winner!&quot;);
+  }
+  symbol = 3 - symbol;
+  show();
+}</code></pre><p id="0df52714-9956-433b-89cb-cb23b3c10e6d" class="">其实这个逻辑也不难理解 就是让电脑通过穷举发现收益最大的一步然后move.</p><p id="c1df03bd-bd3d-458c-b393-b4f8573c1e9b" class="">
+</p><p id="26615b26-940b-4c6c-b49b-34ceba1deb33" class="">
+</p><h2 id="e4650cf8-7ae5-4092-9a3d-1b4ae41d6bc9" class="">红绿灯问题(setTimeout、Promise、Async/Await)</h2><p id="7d1c42b4-779c-4787-805b-0242aeede060" class=""><a href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/33">https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/33</a></p><p id="53570180-1f1b-4125-9d43-de022191bd2e" class="">version 1: setTimeout</p><p id="8f2d8846-7c76-4c5a-b85a-e69e0c1756f4" class="">这个在node.js圈子里面被大家称为call-back hell 回调地狱</p><pre id="2a38bf53-fb3d-4074-92ce-0cf17ce3725d" class="code"><code>function go() {
+  green();
+  setTimeout(function() {
+    yellow();
+    setTimeout(function() {
+      red();
+      setTimeout(function() {
+        go();
+      }, 5000);
+    }, 2000);
+  }, 10000);
+}</code></pre><p id="03f13b5b-b403-49c3-8d93-35004ebaf26a" class="">
+</p><p id="7f60faee-08fb-4235-93f9-e95eaaa1d2e2" class="">这里我们主要是通过setTimeout的方式来控制红绿灯的</p><p id="aef66829-9926-44ce-beda-c42f057f57ae" class="">
+</p><p id="f9f8429f-02d3-40dc-8e26-499a2dde3101" class=""><strong>promise版本</strong>：</p><pre id="ee89d845-7c5f-41ff-9197-fdcee41f6d08" class="code"><code>function sleep(milliseconds) {
+  return new Promise((resolve, reject) =&gt; {
+    setTimeout(resolve, milliseconds);
+  })
+}
+
+function go() {
+  if (!!stopProgram) {
+    removeLight();
+    return;
+  }
+  green();
+  sleep(1000).then(() =&gt; {
+    yellow();
+    return sleep(200);
+  }).then(() =&gt; {
+    red();
+    return sleep(500);
+  }).then(go);
+}</code></pre><p id="466bdf13-be21-4482-b931-9a96db47f10d" class="">在这个版本里面我们发现我们可以通过promise 来实现红绿灯的切换。</p><p id="8310c0e2-6c16-4148-85a7-3d7ddc93e2b3" class="">
+</p><p id="d7426f4e-da47-49b6-a4f4-4c69aaf86963" class="">async/await 版本</p><p id="dff678a5-2e9f-49cd-be7c-811cbccc5969" class="">当我们使用async/await的时候其实底层用的就是promise</p><pre id="564417bb-fd6e-4d77-a0a9-e975ba0c80e5" class="code"><code>function sleep(milliseconds) {
+  return new Promise((resolve, reject) =&gt; {
+    setTimeout(resolve, milliseconds);
+  })
+}
+
+async function go() {
+  if (!!stopProgram) {
+    removeLight();
+    return;
+  }
+  while (true) {
+    green();
+    await sleep(1000);
+    yellow();
+    await sleep(200);
+    red();
+    await sleep(500);
+  }
+}</code></pre><p id="82e91737-de4a-4f9d-9922-70b07be19aec" class="">
+</p><p id="fef65253-eecb-4d7d-af6b-ecbca1ca0561" class="">最后我们再写一个手动的版本：</p><pre id="8b9dfcd2-0a52-4af6-bbfd-672ea108badb" class="code"><code>function happen(element, eventName) {
+  return new Promise((resolve, reject) =&gt; {
+    element.addEventListener(eventName, resolve, {once:true});
+  })
+}
+
+async function go() {
+  if (!!stopProgram) {
+    removeLight();
+    return;
+  }
+  while (true) {
+    green();
+    await happen(document.getElementById(&quot;next&quot;), &quot;click&quot;);
+    yellow();
+    await happen(document.getElementById(&quot;next&quot;), &quot;click&quot;);
+    red();
+    await happen(document.getElementById(&quot;next&quot;), &quot;click&quot;);
+  }
+}</code></pre><p id="bcd2bde9-0180-44ec-9ec7-12e4edb86ae5" class="">这个就是完全听next的</p><p id="0cded6ff-7657-4036-be2c-dfa9bececcd8" class="">
+</p><p id="ef800e7f-bbc2-40f4-bbcd-5cb1c9978b04" class="">generator 与异步：</p><ul id="d81339bc-ebf4-448f-bae1-df54092481f0" class="bulleted-list"><li>generator 模拟async/await</li></ul><ul id="fb3c38eb-92e9-4c43-a85b-34dba2c443f6" class="bulleted-list"><li>async generator</li></ul><p id="fe30eccd-1b1c-4a29-98cf-17bbb860474f" class="">
+</p><p id="c51819d1-afad-4081-b8fe-88e834014e60" class="">
+</p><figure id="bd540cc0-3758-45dd-9c3d-e6a7d198dd04" class="image"><a href="images/Untitled%201.png"><img style="width:1420px" src="images/Untitled%201.png"/></a></figure><p id="e08fc2fc-1903-48c3-9fbe-e0e1289e9b11" class="">
+</p></div></div><hr id="b605172a-c2c7-4ebb-b913-21f72fd99179"/><figure class="block-color-red_background callout" style="white-space:pre-wrap;display:flex" id="fa0b4347-628e-4e23-8eb4-79ee2851f87a"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><strong>SUMMARY:   </strong></div></figure><p id="6fb84e56-8817-42ba-b11b-12b756fe058e" class="">Next to do：</p><ul id="6b53e5bf-855b-474c-8754-e9c1de5ae408" class="bulleted-list"><li>首先我们可以改进棋盘 建议参考codepen上面一些，比较好的css代码可以节省很多时间</li></ul><ul id="1c0c9eeb-c8ab-4a75-b0e8-c6bfd6efc448" class="bulleted-list"><li>另外没有写unit test 这个可以加上</li></ul><ul id="07b739da-48ed-4894-82e9-aa1924db7adb" class="bulleted-list"><li>引入lint检查javascript规范</li></ul><ul id="0ca401e6-1735-4d2d-b4a1-80f991ea5ec9" class="bulleted-list"><li>not responsive</li></ul><ul id="5304f99c-b8a2-4ae0-9e9c-a221869aa0dd" class="bulleted-list"><li>在红绿灯项目中可以通过</li></ul><p id="605e2c1c-8aad-49d8-8e0e-486ec8c67abd" class="">
+</p><p id="72dcccbf-e691-4aa5-acb8-aa5b9be69267" class=""><strong>几个做的比较好的例子：</strong>
+<a href="https://github.com/TAOTAORAN/Frontend-04-Template/tree/master/Week_01">https://github.com/TAOTAORAN/Frontend-04-Template/tree/master/Week_01</a>
+<a href="https://github.com/silkwromzf/Frontend-04-Template/tree/master/Week_01">https://github.com/silkwromzf/Frontend-04-Template/tree/master/Week_01</a>
+<a href="https://github.com/sharminlin/Frontend-04-Template/tree/master/Week_01">https://github.com/sharminlin/Frontend-04-Template/tree/master/Week_01</a>
+<a href="https://github.com/code-begin-world/Frontend-04-Template/tree/master/Week_01">https://github.com/code-begin-world/Frontend-04-Template/tree/master/Week_01</a></p><p id="d2e0f4b9-7826-4536-9e2c-dbf8f9e2cd50" class="">
+</p></div></article></body></html>
