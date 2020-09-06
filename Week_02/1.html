@@ -23,16 +23,53 @@
   </style>
 </head>
 <body>
-  <div id="container">
-
-  </div>
+  <div id="container"></div>
   <button onclick="saveMap()">save</button>
   <script>
-    let map = localStorage["map"] ? JSON.stringify(map) : Array(1000).fill(0);
+    //get 100 * 100 map array from localStorage
+    let map = localStorage.getItem('map') ? JSON.parse(localStorage.getItem('map')) : Array(10000).fill(0)
+    //get container element from page
+    let container = document.getElementById("container");
   
-  
-    function saveMap() {
-      localStorage['map'] = JSON.stringify(map);
+    //Draw 100 * 100 map
+    for (let row = 0; row < 100; row++) {
+      for (let col = 0; col < 100; col++) {
+        let el = document.createElement('div');
+        el.classList.add('cell');
+        
+        if (map[getPoint(row, col)] === 1) {
+          el.style.backgroundColor = "#000";
+        }
+
+        el.addEventListener('mousemove', e => {
+          if (mousedown) {
+            map[getPoint(row, col)] = clear ? 0 : 1;
+            el.style.backgroundColor = clear ? '#f5f5f6' : '#000';
+          }
+        });
+        container.appendChild(el)
+      }
     }
+
+
+    function getPoint(row, col) {
+      return row * 100 + col;
+    }
+
+    
+
+    let mousedown = false;
+    let clear = false;
+    document.addEventListener('mousedown', e => {
+      mousedown = true;
+      clear = (e.which === 3);
+    })
+    document.addEventListener('mouseup', () => mousedown = false);
+    document.addEventListener('contentmenu', e => preventDefault())
+
+    function saveMap() {
+      localStorage.setItem('map', JSON.stringify(map));
+    }
+
   </script>
 </body>
