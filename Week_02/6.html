@@ -75,6 +75,18 @@
         this.data.pop();
         return min;
       }
+      insertAt() {
+        this.data[i] = v;
+        while(i < 0 && this.comapare(v, this.data[Math.floor((i-1)/2)]) < 0) {
+          this.data[i] = this.data[Math.floor((i-1)/2)];
+          this.data[Math.floor((i-1)/2)] = v;
+          i = Math.floor((i - 1) / 2);
+        }
+      }
+      insert(v) {
+        console.log(v);
+        this.insertAt(this.data.length, v);
+      }
       give(v) {
         this.data.push(v);
       }
@@ -119,12 +131,13 @@
         if (x < 0 || x >= 100 || y < 0 || y >= 100) {
           return;
         }
-        if (table[y * 100 + x]) {
+        const value = table[getPoint(x, y)];
+        if (!value || value === null) {
           return;
         }
         //add color to path.
         await sleep(5);
-        container.children[getPoint(row, col)].style.backgroundColor = 'lightgreen';
+        container.children[getPoint(x, y)].style.backgroundColor = 'lightgreen';
         table[y * 100 + x] = pre;
         queue.push([x, y])
       }
@@ -134,7 +147,7 @@
       }
 
       while(queue.length) {
-        const [row, col] = queue.shift();
+        const [row, col] = queue.take();
         if (row === end[0] && col === end[1]) {
           const path = [end];
           let pre = table[getPoint(row, col)];
