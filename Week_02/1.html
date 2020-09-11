@@ -32,7 +32,28 @@
     let container = document.getElementById("container");
   
     //Draw 100 * 100 map
-    for (let row = 0; row < 100; row++) {
+    drawMap();
+
+
+    function getPoint(row, col) {
+      return row * 100 + col;
+    }
+
+    let mousedown = false;
+    let clear = false;
+    document.addEventListener('mousedown', e => {
+      mousedown = true;
+      clear = (e.which === 3);
+    })
+    document.addEventListener('mouseup', () => mousedown = false);
+    document.addEventListener('contentmenu', e => preventDefault())
+
+    function saveMap() {
+      localStorage.setItem('map', JSON.stringify(map));
+    }
+
+    function drawMap() {
+      for (let row = 0; row < 100; row++) {
       for (let col = 0; col < 100; col++) {
         let el = document.createElement('div');
         el.classList.add('cell');
@@ -50,26 +71,6 @@
         container.appendChild(el)
       }
     }
-
-
-    function getPoint(row, col) {
-      return row * 100 + col;
     }
-
-    
-
-    let mousedown = false;
-    let clear = false;
-    document.addEventListener('mousedown', e => {
-      mousedown = true;
-      clear = (e.which === 3);
-    })
-    document.addEventListener('mouseup', () => mousedown = false);
-    document.addEventListener('contentmenu', e => preventDefault())
-
-    function saveMap() {
-      localStorage.setItem('map', JSON.stringify(map));
-    }
-
   </script>
 </body>
