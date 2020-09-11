@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .cell {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      line-height: 7px;
+      background-color: #f5f5f5;
+      border-width: 0 1px 1px 0;
+      border-color: white;
+      border-style: solid;
+      vertical-align: top;
+    }
+    #container {
+      width: 701px;
+      font-size: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  <button onclick="save()">save</button>
+  <button onclick="clean()">clean</button>
+  <button onclick="findPath(map, [0, 0], [50, 50])">start</button>
+  <script>
+    let map = localStorage.getItem('map') ? JSON.parse(localStorage.getItem('map')) : Array(10000).fill(0);
+    let container = document.getElementById('container')
+    for (let row = 0; row < 100; row++) {
+      for (let col = 0; col < 100; col++) {
+        let el = document.createElement('div');
+        el.classList.add('cell');
+
+        if (map[getPoint(row, col)] === 1){
+          el.style.backgroundColor = '#000';
+        }
+
+        el.addEventListener('mousemove', e => {
+          if (mousedown) {
+            map[getPoint(row, col)] = clear ? 0 : 1;
+            el.style.backgroundColor = clear ? '#f5f5f5' : '#000';
+          }
+        })
+        container.appendChild(el);
+      }
+    }
+    
+    
+    //improve searching speed by introducing this new class
+    class Sorted {
+      constructor(data, compare) {
+        this.data = data;
+        this.compare = compare || ((a, b) => a - b);
+      }
+      take() {
+        const len = this.data.length;
+        if (!len) {
+          return;
+        }
+        let min = this.data[0];
+        let minIndex = 0;
+
+        for (let i = 1; i < len; i++) {
+          if (this.compare(this.data[i], min) < 0) {
+            min = this.data[i];
+            minIndex = 1;
+          }
+        }
+
+        this.data[minIndex] = this.data[len - 1];
+        this.data.pop();
+        return min;
+      }
+      insertAt() {
+        this.data[i] = v;
+        while(i < 0 && this.comapare(v, this.data[Math.floor((i-1)/2)]) < 0) {
+          this.data[i] = this.data[Math.floor((i-1)/2)];
+          this.data[Math.floor((i-1)/2)] = v;
+          i = Math.floor((i - 1) / 2);
+        }
+      }
+      insert(v) {
+        console.log(v);
+        this.insertAt(this.data.length, v);
+      }
+      give(v) {
+        this.data.push(v);
+      }
+      get length() {
+        return this.data.length;
+      }
+    }
+
+    
+
+    function getPoint(row, col) {
+      return row * 100 + col;
+    }
+
+    //add delay to improve user experience
+    function sleep (t) {
+      return new Promise(resolve => {
+        setTimeout(resolve, t);
+      })
+    }
+
+    let mousedown = false;
+    let clear = false;
+    document.addEventListener('mousedown', e => {
+      mousedown = true
+      clear = (e.which === 3)
+    })
+    document.addEventListener('mouseup', () => mousedown = false)
+    document.addEventListener('contextmenu', e => e.preventDefault())
+
+    /**
+    * Find the path in map by providing start and end point.
+    * @param {Array} map - the map
+    * @param {Array} start - location of start location.
+    * @param {Array} end - location of destination
+    */
+    async function findPath (map, start, end) {
+      let table = Object.create(map);
+      let queue = new Sorted([start], (a, b) => distanace(a) - distance(b));
+      
+      async function insert(x, y, pre) {
+        if (x < 0 || x >= 100 || y < 0 || y >= 100) {
+          return;
+        }
+        const value = table[getPoint(x, y)];
+        if (!value || value === null) {
+          return;
+        }
+        //add color to path.
+        await sleep(5);
+        container.children[getPoint(x, y)].style.backgroundColor = 'lightgreen';
+        table[y * 100 + x] = pre;
+        queue.push([x, y])
+      }
+
+      function distance(point) {
+        return (point[0] - end[0]) ** 2 + (point[1] - end[1]) ** 2;
+      }
+
+      while(queue.length) {
+        const [row, col] = queue.take();
+        if (row === end[0] && col === end[1]) {
+          const path = [end];
+          let pre = table[getPoint(row, col)];
+          while (pre && typeof pre === 'object') {
+            path.push(pre);
+            let [r, c] = pre;
+            container.children[getPoint(r, c)].style.backgroundColor = 'green';
+            pre = table[getPoint(r, c)];
+            await sleep(30);
+          }
+          return path;
+        }
+        await insert(row - 1, col, [row, col]);
+        await insert(row + 1, col, [row, col]);
+        await insert(row, col - 1, [row, col]);
+        await insert(row, col + 1, [row, col]);
+
+        await insert(row - 1, col - 1, [row, col]);
+        await insert(row + 1, col + 1, [row, col]);
+        await insert(row - 1, col + 1, [row, col]);
+        await insert(row + 1, col - 1, [row, col]);
+      }
+      return null;
+    }
+
+    function save() {
+      localStorage.setItem('map', JSON.stringify(map));
+    }
+    
+    function clean() {
+      localStorage.removeItem('map');
+      location.reload();
+    }
+
+
+
+    
+  </script>
+</body>
+</html>
