@@ -1,3 +1,5 @@
+//字典树 trie
+
 //利用symbol不可重复特性 让代码变得更严谨
 let $ = Symbol("$");
 class Trie {
