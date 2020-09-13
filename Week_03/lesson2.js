@@ -1,43 +1,36 @@
 //利用symbol不可重复特性 让代码变得更严谨
 let $ = Symbol("$");
 class Trie {
-  constructor() {
-    this.root = Object.create(null);
+  constructor () {
+    this.root = Object.create(null)
   }
-  insert(word) {
-    console.log(word);
-    console.log(this.root);
-    let node = this.root;
-    for (let c of word) {
-      if (!node[c]) {
-        node[c] = Object.create(null);
+  insert (words) {
+    let node = this.root
+
+    for (let n of words) {
+      if (!node[n]) {
+        node[n] = Object.create(null)
       }
-      node = node[c];
+      node = node[n]
     }
-    if (!$ in node) {
-      node[$] = 0;
-    }
-    node[$]++;
+    if (!($ in node)) node[$] = 0
+    node[$]++
   }
   most () {
-    let maxLength = 0;
-    let maxWord = null;
-    
-    let visit = (node, word) => {
-      // console.log(node);
-      //find the end point of the words
-      if (node[$] && node[$] > maxLength) {
-        maxLength = node[$];
-        maxWord = word;
+    let mostWords = ''
+    let mostLength = 0
+
+    function visited (node, words) {
+      if (node[$] && node[$] > mostLength) {
+        mostWords = words
+        mostLength = node[$]
       }
-      for (let p in node) {
-        visit(node[p], word + p);
+      for (let n in node) {
+        visited(node[n], words + n)
       }
     }
-    visit(this.root, "");
-    // console.log(maxWord);
-    // console.log(maxLength);
-    return { maxWord, maxLength };
+    visited(this.root, '')
+    return { mostWords, mostLength }
   }
 }
 
@@ -47,7 +40,6 @@ function randomWord(length) {
   for (let i = 0; i < length; i++) {
     s += String.fromCharCode(Math.random() * 26 + "a".charCodeAt(0));
   }
-  console.log("s", s);
   return s;
 }
 let trie = new Trie();
@@ -57,4 +49,3 @@ for (let i = 0; i < 100000; i++) {
 }
 
 console.log(trie.most());
-console.log(trie);
