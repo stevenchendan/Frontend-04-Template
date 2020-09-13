@@ -49,6 +49,6 @@ function kmp (source, pattern) {
   console.log(table);
 }
 
-kmp("", "abcdabcd")
+console.log(kmp("hello", "ll"));
 
 
