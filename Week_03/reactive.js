@@ -1,5 +1,7 @@
 let callbacks = [];
 
+let useReactivities = [];
+
 let object = {
   a: 1,
   b: 2
@@ -13,7 +15,9 @@ effect(() => {
 
 
 function effect(callback) {
-  callbacks.push(callback);
+  // callbacks.push(callback);
+  useReactivities = [];
+  callback();
 }
 
 
