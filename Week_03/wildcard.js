@@ -38,6 +38,10 @@ function find(source, pattern) {
     reg.lastIndex = lastIndex;
 
     console.log(reg.exec(source));
+
+    if (!reg.exec(source)) {
+      return false;
+    }
     lastIndex = reg.lastIndex;
   }
 
