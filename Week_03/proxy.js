@@ -8,3 +8,6 @@ let po = new Proxy(object, {
     console.log(obj, prop, val);
   }
 })
+
+po.a = 3
+
