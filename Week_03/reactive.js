@@ -1,16 +1,15 @@
-let callbacks = [];
-
-let useReactivities = [];
-
+let callbacks = new Map();
+let reactivities = new Map();
+let usedReactivities = [];
 let object = {
-  a: 1,
+  a: {b : 3},
   b: 2
 }
 
 let po = reactive(object);
 
 effect(() => {
-  console.log(po.a);
+  console.log(po.a.b);
 })
 
 
@@ -18,23 +17,48 @@ function effect(callback) {
   // callbacks.push(callback);
   useReactivities = [];
   callback();
+  console.log(usedReactivities);
+
+  for (let reactivity of usedReactivities) {
+    if (!callbacks.has(reactivity[0])) {
+      callbacks.set(reactivity[0], new Map());
+    }
+    if (!callbacks.get(reactivity[0]).has(reactivity[1])) {
+      callbacks.get(reactivity[0]).set(reactivity[1], []);
+    }
+    callbacks.get(reactivity[0]).get(reactivity[1]).push(callback);
+  }
 }
 
 
 function reactive(object) {
-  return new Proxy(object, {
+  if (reactivities.has(object)) {
+    return reactivities.get(object);
+  }
+
+
+  let proxy = new Proxy(object, {
     set(obj, prop, val) {
       obj[prop] = val;
-      for (let callback of callbacks) {
-        callback();
+      if (callbacks.get(obj)) {
+        if (callbacks.get(obj).get(prop)) {
+          for (let callback of callbacks.get(obj).get(prop)) {
+            callback();
+          }
+        }
       }
       return obj[prop];
     },
     get(obj, prop) {
-      console.log(obj, prop);
+      usedReactivities.push([obj, prop]);
+      if (typeof obj[prop] === "object") {
+        return reactive(obj[prop]);
+      }
       return obj[prop];
     }
   })
+  reactivities.set(object, proxy);
+  return proxy;
 }
 
 po.x = 99
