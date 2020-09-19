@@ -9,7 +9,21 @@ let object = {
 let po = reactive(object);
 
 effect(() => {
-  console.log(po.a.b);
+  document.getElementById("r").value = po.r;
+})
+effect(() => {
+  document.getElementById("g").value = po.g;
+})
+effect(() => {
+  document.getElementById("b").value = po.b;
+})
+
+document.getElementById("r").addEventListener("input", event => po.r = event.target.value);
+document.getElementById("g").addEventListener("input", event => po.g = event.target.value);
+document.getElementById("b").addEventListener("input", event => po.b = event.target.value);
+
+effect(() => {
+  document.getElementById("color").style.background = `rgb(${po.r}, ${po.g}, ${po.b})`;
 })
 
 
