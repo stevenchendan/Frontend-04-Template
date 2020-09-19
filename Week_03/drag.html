@@ -55,15 +55,16 @@
     dragable.addEventListener('mousedown', function(event) {
       let startX = event.clientX;
       let startY = event.clientY;
+
+      function move(e) {
+        dragable.style.transform = `translate(${baseX + e.clientX - startX}px, ${baseY + e.clientY - startY}px)`;
+      }
+
       let up = () => {
         baseX = baseX + event.clientX - startX;
         baseY = baseY + event.clientY - startY;
         document.removeEventListener('mousemove', move);
         document.removeEventListener('mouseup', up);
-      }
-
-      let move = event => {
-        dragable.style.transform = `translate(${baseX + event.clientX - startX}px, ${baseY + event.clientY - startY}px)`;
       }
 
       document.addEventListener("mousemove", move);
