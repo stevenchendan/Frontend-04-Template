@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
+    <style>
+      #dragable {
+        display: inline-block;
+        width:100px;
+        height:100px;
+        background-color:pink;
+      }
+    </style>
     <div id="container">
       文字 文字 文字 文字 文字 文字 文字 文字 文字 文字 文字
       文字 文字 文字 文字 文字 文字 文字 文字 文字 文字 文字
@@ -45,7 +53,7 @@
       文字 文字 文字 文字 文字 文字 文字 文字 文字 文字 文字
       文字 文字 文字 文字 文字 文字 文字 文字 文字 文字 文字
     </div>
-    <div id="dragable" style="width:100px;height:100px;background-color:pink;"></div>
+    <div id="dragable" style="display:inline-block;width:100px;height:100px;background-color:pink;"></div>
   </body>
   <script>
     let dragable = document.getElementById("dragable");
@@ -70,5 +78,32 @@
       document.addEventListener("mousemove", move);
       document.addEventListener("mouseup", up);
     });
+
+    let ranges = [];
+    let container = document.getElementById("container");
+    for (let i = 0; i < container.childNodes[0].textContent.length; i++) {
+      let range = document.createRange();
+      range.setStart(container.childNodes[0], 1);
+      range.setEnd(container.childNodes[0], i);
+      console.log(range.getBoundingClientRect());
+      ranges.push(range);
+    }
+
+    function getNestest(x, y) {
+      let min = Infinity;
+      let nearest = null;
+
+      for (let range in ranges) {
+        let rect = range.getBoundingClientRect();
+        let distance = (rect.x - x) ** 2 + (rect.y - y) ** 2;
+        if (distance < min) {
+          nearest = range;
+          min = distance;
+        }
+      }
+      return nearest;
+    }
+
+    document.addEventListener("selectstart", event => event.preventDefault());
   </script>
 </html>
