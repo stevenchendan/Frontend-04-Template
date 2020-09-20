@@ -65,18 +65,21 @@
       let startY = event.clientY;
 
       function move(e) {
-        dragable.style.transform = `translate(${baseX + e.clientX - startX}px, ${baseY + e.clientY - startY}px)`;
+        const range = getNestest(e.clientX, e.clientY);
+        range.insertNode(el);
       }
 
-      let up = () => {
-        baseX = baseX + event.clientX - startX;
-        baseY = baseY + event.clientY - startY;
+      function end(e) {
+        recordx = e.clientX - startX + recordX;
+        recordy = e.clientY - startY + recordY;
+
         document.removeEventListener('mousemove', move);
-        document.removeEventListener('mouseup', up);
+        document.removeEventListener('mouseup', end);
       }
 
       document.addEventListener("mousemove", move);
-      document.addEventListener("mouseup", up);
+      document.addEventListener("mouseup", end);
+      document.addEventListener('selectstart', e => e.preventDefault());
     });
 
     let ranges = [];
@@ -95,13 +98,17 @@
 
       for (let range in ranges) {
         let rect = range.getBoundingClientRect();
-        let distance = (rect.x - x) ** 2 + (rect.y - y) ** 2;
+        let d = distance(x - rect.x, y - rect.y);
         if (distance < min) {
           nearest = range;
           min = distance;
         }
       }
       return nearest;
+    }
+
+    function distance(x, y) {
+      return x ** 2 + y ** 2; 
     }
 
     document.addEventListener("selectstart", event => event.preventDefault());
