@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Realm</title>
+  
+</head>
+<style>
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+<body>
+  <div id="realm"></div>
+  <script src="https://gw.alipayobjects.com/os/lib/antv/g6/3.7.3/dist/g6.min.js"></script>
+  <script>
+    // const objects = {
+    //   id: 'Realm Object',
+    //   children: [
+    //     {
+    //       id: 'Field Name',
+    //       children: [{id: '[[Intrinsics]]'}, {id: '[[GlobalObject]]'}, {id: '[[GlobalEnv]]'}, {id: '[[TemplateMap]]'}]
+    //     },
+    //     {
+    //       id: 'Methods',
+    //       children: [{ id: 'CreateRealm ()' }, { id: 'CreateIntrinsics (realmRec)' },{ id: 'SetRealmGlobalObject (realmRec, globalObj, thisValue)' }, { id: 'SetDefaultGlobalBindings (realmRec)' }]
+    //     },
+    //   ]
+    // }
+    const data = {
+      id: 'root',
+      children: [
+        {
+          id: 'subTree1',
+          children: [{id: 'subTree1.1'}]
+        },
+        {
+          id: 'subTree2',
+          children: [{id: 'subTree2.2'}]
+        }
+      ]
+    };
+    // const width = document.getElementById('container').scrollWidth;
+    // const height = document.getElementById('container').scrollHeight || 500;
+    
+    
+    const graph = new G6.Graph({
+      container: 'realm',  // String | HTMLElement，必须，在 Step 1 中创建的容器 id 或容器本身
+      width: 800,              // Number，必须，图的宽度
+      height: 500              // Number，必须，图的高度
+    });
+    graph.node(function (node) {
+      return {
+        label: node.id,
+        labelCfg: {
+          offset: 10,
+          position: node.children && node.children.length > 0 ? 'left' : 'right',
+        },
+      };
+    });
+    graph.data(data);  // 读取 Step 2 中的数据源到图上
+    graph.render();    // 渲染图
+    graph.fitView();
+  </script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tutorial Demo</title>
+</head>
+  <body>
+    <div id="mountNode"></div>
+    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-3.1.0/build/g6.js"></script>
+    <script>
+      // 定义数据源
+      const data = {
+        // 点集
+        nodes: [{
+          id: 'node1',
+          x: 100,
+          y: 200
+        },{
+          id: 'node2',
+          x: 300,
+          y: 200
+        }],
+        // 边集
+        edges: [
+          // 表示一条从 node1 节点连接到 node2 节点的边
+          {
+            source: 'node1',
+            target: 'node2'
+          }
+        ]
+      };
+      
+      // 创建 G6 图实例
+      const graph = new G6.Graph({
+        container: 'mountNode', // 指定图画布的容器 id，与第 9 行的容器对应
+        // 画布宽高
+        width: 800,
+        height: 500
+      });
+      // 读取数据
+      graph.data(data);
+      // 渲染图
+      graph.render();
+      graph.fitView();
+    </script>
+  </body>
+</html> -->
