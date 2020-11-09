@@ -22,6 +22,6 @@ class Request {
   }
 
   send (connection) {
-
+    
   }
 }
