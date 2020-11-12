@@ -1,0 +1,23 @@
+{
+  "name": "frontend-04-template",
+  "version": "1.0.0",
+  "description": "Front End Practice",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "standard": "^16.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevenchendan/Frontend-04-Template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stevenchendan/Frontend-04-Template/issues"
+  },
+  "homepage": "https://github.com/stevenchendan/Frontend-04-Template#readme"
+}
