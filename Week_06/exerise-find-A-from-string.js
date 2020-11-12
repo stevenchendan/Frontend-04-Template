@@ -13,4 +13,4 @@ function findAFromString(str) {
 }
 
 let result = findAFromString("testaa");
-console.log(result);
+console.log(result)
